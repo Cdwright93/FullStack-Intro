@@ -104,7 +104,7 @@ export default App;
 - In ./.env, add the following environment variable
 	- REACT_APP_URL_ENDPOINT=https://62a8b06d943591102ba80fee.mockapi.io
 	- _Important_: Specifically for react applications, all environment variables MUST be prefixed with REACT_APP.
-- In the global scope above ```<App/>```, create a new variable called urlEndpoint and set it equal to the REACT_APP_URL_ENDPOINT environment variable.[5]
+- In the global scope above```<App/>```, create a new variable called urlEndpoint and set it equal to the REACT_APP_URL_ENDPOINT environment variable.[5]
 - In the body of ```<App/>```, add an invocation of the useEffect hook with an empty function passed in as the first argument and an empty array passed in as the second. [6]
 	- _Note_:
 		- The empty function passed into useEffect is known as an effect function.
