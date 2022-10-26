@@ -82,6 +82,7 @@ export default App;
 	- REACT_APP_URL_ENDPOINT=https://62a8b06d943591102ba80fee.mockapi.io
 	- _Important_: Specifically for react applications, all environment variables MUST be prefixed with REACT_APP.
 - In the global scope above ```<App/>```, create a new variable called urlEndpoint and set it equal to the REACT_APP_URL_ENDPOINT environment variable.
+- Everytime .env file is added/updated in the application, you will have to restart your react terminal process.
 - In the body of ```<App/>```, add an invocation of the useEffect hook with an empty function passed in as the first argument and an empty array passed in as the second.
 	- _Note_:
 		- The empty function passed into useEffect is known as an effect function.
@@ -105,6 +106,7 @@ export default App;
 	- REACT_APP_URL_ENDPOINT=https://62a8b06d943591102ba80fee.mockapi.io
 	- _Important_: Specifically for react applications, all environment variables MUST be prefixed with REACT_APP.
 - In the global scope above```<App/>```, create a new variable called urlEndpoint and set it equal to the REACT_APP_URL_ENDPOINT environment variable.[5]
+- Everytime .env file is added/updated in the application, you will have to restart your react terminal process.
 - In the body of ```<App/>```, add an invocation of the useEffect hook with an empty function passed in as the first argument and an empty array passed in as the second. [6]
 	- _Note_:
 		- The empty function passed into useEffect is known as an effect function.
@@ -115,7 +117,7 @@ export default App;
 		- _Note_: This awaited invocation of fetch is going to make an HTTP request to the url string passed into the fetch() function. The variable result will be an object containing the HTTP result of the request; which includes the response payload as well as information of the response itself. 
 	- Create a new variable below result and set it equal to await result.json() [9]
 		- _Note_: The result.json() method retrieves the actual data/payload of the response and assigns it to the variable result. 
-	- Call setBlogs with the result variable passed in as the argument.
+	- Call setBlogs with the blogs variable passed in as the argument.
 - Just under the fetchBlogs async function and still inside the effect function, invoke fetchBlogs.[10]
 - If you implemented the above correctly, you should see the entire list of 50 blog posts fetched from mockapi rendered to the page.
 ​
