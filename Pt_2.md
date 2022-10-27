@@ -14,7 +14,7 @@
 	- page, initialized to 1
 	- sortBy, initialized to ""
 	- order, initialized to ""
-- In the JSX of <OptionBar/>,
+- In the JSX of ```<OptionBar/>```,
 	- Add a label called Limit and a type="number" input field that sets the limit state variable. Additionally, this input field should have its value attribute set to limit.
 	- Add a label called Page and a type="number" input field that sets the page state variable. Additionally, this input field should have its value attribute set to page.
 	- Add a label called SortBy and a select field that sets the sortBy state variable with the following options:
@@ -28,7 +28,7 @@
 		- An option with the value and display text of desc
 
 2) Generating URL Params
-- _Approach_: Now that we have our input fields setup, we need to use those inputs to generate the parameter portion of our url inside of the useEffect function of ```<App/>```. We will be creating a new function to generate the parameter string and set a new urlParams state variable in the body of <App/>. We will then pass that generator function down as a prop into <OptionBar/> to update the urlParams state variable every time a user updates one of the input fields.
+- _Approach_: Now that we have our input fields setup, we need to use those inputs to generate the parameter portion of our url inside of the useEffect function of ```<App/>```. We will be creating a new function to generate the parameter string and set a new urlParamString state variable in the body of ```<App/>```. We will then pass that generator function down as a prop into ```<OptionBar/>``` to update the urlParamString state variable every time a user updates one of the input fields.
 - Add a new state variable to ```<App/>``` called urlParamString and initialize it to an empty string "".
 - In the body of ```<App/>```, create a new function called generateUrlParams with the parameters limit, page, sortBy and order. 
 	- This function should take these four parameters and create a query param string that will be concatenated onto our blogs fetch url. The param string should start with a question mark "?". Then for each parameter, concatenate the string {parameter-name}={parameter-value} onto the param string separated by an "&". Once you generate the query string in the function, set the state variable urlParamString to the generated query string. E.G. If limit = 5 and page = 2, the urlParamString state variable should be set to "?limit=5&page=2". If the limit = 4, page = 3, sortBy = createdAt and order = asc, the urlParamString state variable should be set to "?limit=4&page=3&sortBy=createdAt&order=asc".
