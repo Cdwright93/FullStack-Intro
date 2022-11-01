@@ -26,10 +26,52 @@ function App() {
 			});
 	}, [sort, page, search, limit]);
 
+	const handleSearch = (e) => {
+		setSearch(e.target.value);
+	};
+	const handleSort = (e) => {
+		setSort(e.target.value);
+	};
+	const handlePage = (e) => {
+		setPage(e.target.value);
+	};
+	const handleLimit = (e) => {
+		setLimit(e.target.value);
+	};
+
+	const optionBar = (
+		<div className="option-bar">
+			<input
+				type="text"
+				placeholder="Search"
+				value={search}
+				onChange={handleSearch}
+			/>
+			<select value={sort} onChange={handleSort}>
+				<option value="asc">Ascending</option>
+				<option value="desc">Descending</option>
+			</select>
+			<select value={page} onChange={handlePage}>
+				<option value="1">Page 1</option>
+				<option value="2">Page 2</option>
+				<option value="3">Page 3</option>
+				<option value="4">Page 4</option>
+				<option value="5">Page 5</option>
+			</select>
+			<select value={limit} onChange={handleLimit}>
+				<option value="10">Limit 10</option>
+				<option value="20">Limit 20</option>
+				<option value="30">Limit 30</option>
+				<option value="40">Limit 40</option>
+				<option value="50">Limit 50</option>
+			</select>
+		</div>
+	);
 	return (
 		<div className="App">
 			<h1>Blog List</h1>
 			<ol className="blog-ordered-list">
+				{optionBar}
 				{blogs.map((blog) => {
 					console.log(blog);
 					return (
