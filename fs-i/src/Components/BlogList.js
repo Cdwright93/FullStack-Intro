@@ -1,14 +1,15 @@
 import BlogListCard from "./BlogListCard";
+import "../App.css";
 
 const BlogList = ({ blogs }) => {
 	return (
-		<div className="blog-list">
+		<ol className="blog-ordered-list">
 			{blogs.map((blog) => (
-				<div className="blog-preview" key={blog.id}>
-					<BlogListCard blog={blog} />
-				</div>
+					<li className='blog-item' key={blog.id}>
+						<BlogListCard blog={blog} />
+					</li>
 			))}
-		</div>
+		</ol>
 	);
 };
 
