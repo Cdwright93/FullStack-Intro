@@ -1,58 +1,44 @@
 /* eslint-disable no-unused-vars */
 import "./App.css";
-import BlogList from "./Components/BlogList";
 import { useState, useEffect } from "react";
-import OptionBar from "./Components/OptionBar";
+import BlogItem from "./Components/BlogItem";
 
 let URL = process.env.REACT_APP_URL_ENDPOINT;
 console.log(URL);
 
+//taking the URL from the .env file we will retrieve blogs from the mock api
+// once we get the initial blog data it will be displayed on the page in a standard ordered list
+// we will also make a component that will allow the user to sort, filter, and search the blogs
+// we will use a useEffect hook to make the api call and store the data in a state variable
+
 function App() {
 	const [blogs, setBlogs] = useState([]);
-	const [limit, setLimit] = useState(10);
-	const [page, setPage] = useState(1);
-	const [sortBy, setSortBy] = useState("createdAt");
-	const [order, setOrder] = useState("desc");
-	const [loading, setLoading] = useState(true);
-	const [error, setError] = useState(null);
 	const [search, setSearch] = useState("");
-
-	const fetchBlogs = async () => {
-		setLoading(true);
-		try {
-			const res = await fetch(
-				`${URL}/blogs?_limit=${limit}&_page=${page}&_sortby=${sortBy}&_order=${order}`
-			);
-			const data = await res.json();
-			setBlogs(data);
-			setLoading(false);
-		} catch (err) {
-			setError(err.message);
-			setLoading(false);
-		}
-	};
+	const [sort, setSort] = useState("asc");
+	const [page, setPage] = useState(1);
+	const [limit, setLimit] = useState(10);
 
 	useEffect(() => {
-		fetch(
-			`${URL}/blogs?_limit=${limit}&_page=${page}&_sort=${sortBy}&_order=${order}`
-		)
+		fetch(`${URL}?_page=${page}&_limit=${limit}&_sort=title&_order=${sort}`)
 			.then((res) => res.json())
 			.then((data) => {
 				setBlogs(data);
 			});
-	}, [limit, page, sortBy, order]);
-
-	const handleSearch = (limit, page, sortBy, order) => {
-		setLimit(limit);
-		setPage(page);
-		setSortBy(sortBy);
-		setOrder(order);
-	};
+	}, [sort, page, search, limit]);
 
 	return (
 		<div className="App">
 			<h1>Blog List</h1>
-			<BlogList blogs={blogs} />
+			<ol className="blog-ordered-list">
+				{blogs.map((blog) => {
+					console.log(blog);
+					return (
+						<li key={blog.id}>
+							<BlogItem title={blog.title} text={blog.text} />
+						</li>
+					);
+				})}
+			</ol>
 		</div>
 	);
 }
