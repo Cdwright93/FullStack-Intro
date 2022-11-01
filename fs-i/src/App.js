@@ -19,12 +19,22 @@ function App() {
 	const [limit, setLimit] = useState(10);
 
 	useEffect(() => {
-		fetch(`${URL}?_page=${page}&_limit=${limit}&_sort=title&_order=${sort}`)
+		fetch(
+			`${URL}?_page=${page}&_limit=${limit}&_sort=title&_order=${sort}&search=${search}`
+		)
 			.then((res) => res.json())
 			.then((data) => {
 				setBlogs(data);
 			});
 	}, [sort, page, search, limit]);
+
+	async function fetchBlogs() {
+		const response = await fetch(
+			`${URL}?_page=${page}&_limit=${limit}&_sort=title&_order=${sort}&search=${search}`
+		);
+		const data = await response.json();
+		setBlogs(data);
+	}
 
 	const handleSearch = (e) => {
 		setSearch(e.target.value);
@@ -67,11 +77,17 @@ function App() {
 			</select>
 		</div>
 	);
+
 	return (
 		<div className="App">
 			<h1>Blog List</h1>
 			<ol className="blog-ordered-list">
-				{optionBar}
+				<div className="option-bar">
+					{optionBar}
+					<button className="search-button" onSubmit={fetchBlogs}>
+						Submit
+					</button>
+				</div>
 				{blogs.map((blog) => {
 					console.log(blog);
 					return (
